@@ -39,7 +39,7 @@
 		$query = "SELECT * FROM `".$table."` where `".$key1."`='".$value1."'";
 		if($sql = mysql_query($query))
 		{
-			while ($result =mysql_fetch_assoc($sql)) 
+			while ($result = mysql_fetch_assoc($sql)) 
 			{
 				$data[] = $result;
 				if($value1 == $result['email'])
@@ -47,8 +47,16 @@
 					$_SESSION['email'] = $value1;
 					if($value2 == $result['password'])
 					{
-						$_SESSION['password'] = $value2;
-						header('location: admin_dashboard.php');
+						if(strcmp($table, "admin") == 0)
+						{
+							$_SESSION['password'] = $value2;
+							header('location: admin_dashboard.php');
+						}
+						else if(strcmp($table, "user") == 0)
+						{
+							$_SESSION['password'] = $value2;
+							header('location: home.php');	
+						}
 					}
 					else
 						$_SESSION['error'] = "Inavlid Password";
@@ -60,23 +68,38 @@
 		else
 			$_SESSION['error'] = "No results for this query";
 		
-		if(isset($_SESSION['error']))
-			header('location: main.php');
-				
 		if(count($data) == 0)
 		{
 			$_SESSION['error'] = "Empty table";
-			header('location: main.php');
+			if(strcmp($table, "admin") == 0)
+				header('location: main.php');
+			else if(strcmp($table, "user") == 0)
+				header('location: index.php');
+		}
+		if(isset($_SESSION['error']))
+		{
+			if(strcmp($table, "admin") == 0)
+				header('location: main.php');
+			else if(strcmp($table, "user") == 0)
+				header('location: index.php');
 		}
 	}
 
-	function new_entry_in_admin_table($value1,$value2,$value3)
+	function new_entry_in_any_table($table,$value1,$value2,$value3)
 	{
-		$query = "INSERT INTO `admin`(`username`,`email`,`password`) VALUES ('".$value1."','".$value2."','".$value3."')";
+		$query = "INSERT INTO `".$table."`(`username`,`email`,`password`) VALUES ('".$value1."','".$value2."','".$value3."')";
 		if(mysql_query($query))
 		{
-			$_SESSION['new_admin'] = "Admin added successfully";
-			header('location: main.php');
+			if(strcmp($table, "admin") == 0)
+			{
+				$_SESSION['new_admin'] = "Admin added successfully";
+				header('location: main.php');
+			}
+			else if(strcmp($table, "user") == 0)
+			{
+				$_SESSION['new_user'] = "User added successfully";
+				header('location: index.php');
+			}
 		}
 		else
 			echo "<span style='font-size: 20px; font-family: arial;'>Error:</span><br><hr> <p style='font-size: 16px;'>Unable to run Insert query</p>";

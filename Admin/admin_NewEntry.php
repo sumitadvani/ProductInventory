@@ -19,7 +19,7 @@
 					$flag++;
 			}
 			if($flag == count($data))
-				new_entry_in_admin_table($username,$email,md5($password));
+				new_entry_in_any_table('admin',$username,$email,$password);
 		}
 		else
 			$_SESSION['error'] = "Passwords didn't match";

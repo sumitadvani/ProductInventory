@@ -1,7 +1,12 @@
 <?php
 	include_once('../database_files/db_setup.php');	
-	$val = $_GET['id'];
-	$data = get_data_by_key('pid',$val,'product');
+	if(!isset($_SESSION['email']) or !isset($_SESSION['password']))
+		header('location: index.php');
+	else
+	{
+		$val = $_GET['id'];
+		$data = get_data_by_key('pid',$val,'product');
+	}
 ?>
 <!DOCTYPE html>
 <html>

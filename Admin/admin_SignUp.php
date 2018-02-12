@@ -41,7 +41,7 @@
 				<label>Reference Code</label>
 				<input type="number" class="form-control input-lg" name="reference" required>
 			</div>		
-			<button type="submit" class="btn btn-primary">Done</button>
+			<button type="submit" class="btn btn-primary">Sig Up</button>
 		</form>
 	</div>
 	<br>
