@@ -1,51 +1,43 @@
 <?php
-	include_once('../database_files/db_setup.php');
+	include_once('database_files/db_setup.php');
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<?php include_once('../User/head.php'); ?>
-	<title>Admin Panel | Sign Up</title>
+	<?php include_once('head.php'); ?>
+	<title>Admin Panel | Log In</title>
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
 		<div class="container">
-			<a class="navbar-brand" href="../User/index.php">Blog Of Sumit Advani</a>
+			<a class="navbar-brand" href="index.php">Blog Of Sumit Advani</a>
 			<ul class="nav navbar-nav">
 				<li>
-					<a href="../User/index.php">Home</a>
+					<a href="index.php">Home</a>
 				</li>
 				<li class="active">
-					<a href="main.php">Admin</a>
+					<a href="#">Admin</a>
 				</li>
 			</ul>
 		</div>
 	</nav>
 	<div class="container">
-		<h1>Admin Sign Up</h1>
+		<h1>Admin Login</h1>
 		<hr>
-		<form action="admin_NewEntry.php" method="POST" role="form">
+		<form action="admin_LoginCheck.php" method="POST" role="form">
 			<div class="form-group">
-				<label>Username</label>
-				<input type="text" class="form-control input-lg" name="username" required>
-				<br>
 				<label>e-mail</label>
 				<input type="email" class="form-control input-lg" name="email" required>
 				<br>
 				<label>Password</label>
 				<input type="password" class="form-control input-lg" name="password" required>
-				<br>
-				<label>Confirm Password</label>
-				<input type="password" class="form-control input-lg" name="c_password" required>
-				<br>
-				<label>Reference Code</label>
-				<input type="number" class="form-control input-lg" name="reference" required>
 			</div>		
-			<button type="submit" class="btn btn-primary">Sig Up</button>
+			<button type="submit" class="btn btn-primary">Log In</button>
+			<a href="admin_SignUp.php"><button type="button" class="btn btn-primary">Sign Up</button></a>
 		</form>
 	</div>
 	<br>
-	<?php
+	<?php 
 		if(isset($_SESSION['error']))
 		{
 			echo "<br><div class='container'>
@@ -54,6 +46,17 @@
 					</div>
 				</div>
 			</div>";
+			session_destroy();
+		}
+
+		if(isset($_SESSION['new_admin']))
+		{
+			echo "<br> <div class='container'>
+				<div class='row'>
+					<div class='col-12' style='color:green; font-size:20px; text-align: center;'>".$_SESSION['new_admin']."
+					</div>
+				</div>
+			</div>"; 
 
 			session_destroy();
 		}

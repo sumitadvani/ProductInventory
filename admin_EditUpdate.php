@@ -1,5 +1,5 @@
 <?php 
-	include_once('../database_files/db_setup.php');
+	include_once('database_files/db_setup.php');
 	if(!isset($_SESSION['email']) or !isset($_SESSION['password']))
 		header('location: index.php');
 	$id = $_POST['pid'];
@@ -21,9 +21,9 @@
 				{
 					if($_FILES['image']['name'])
 					{
-						$target = "../images/".$_FILES['image']['name'];
+						$target = "images/".$_FILES['image']['name'];
 						if(move_uploaded_file($_FILES['image']['tmp_name'], $target))
-							$image = "../images/".$_FILES['image']['name'];
+							$image = "images/".$_FILES['image']['name'];
 						else
 							$_SESSION['error'][] = "Unable to upload image";
 					}

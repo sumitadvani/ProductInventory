@@ -1,5 +1,5 @@
 <?php 
-	include_once('../database_files/db_setup.php');
+	include_once('database_files/db_setup.php');
 	if(!isset($_POST['email']) or !isset($_POST['password']))
 		header('location: user_SignUp.php');
 	$data = get_all_data_from_any_table('user');

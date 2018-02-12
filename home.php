@@ -1,5 +1,5 @@
 <?php 
-	include_once('../database_files/db_setup.php'); 
+	include_once('database_files/db_setup.php'); 
 	if(!isset($_SESSION['email']) or !isset($_SESSION['password']))
 		header('location: index.php');
 	else
@@ -22,7 +22,7 @@
 					<a href="#">Home</a>
 				</li>
 				<li>
-					<a href="../admin/main.php">Admin</a>
+					<a href="main.php">Admin</a>
 				</li>
 			</ul>
 		</div>

@@ -1,5 +1,5 @@
 <?php
-	include_once('../database_files/db_setup.php');
+	include_once('database_files/db_setup.php');
 	if(!isset($_SESSION['email']) or !isset($_SESSION['password']))
 		header('location: main.php');
 	else
@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<?php include_once('../User/head.php'); ?>
+	<?php include_once('head.php'); ?>
 	<title>
 		Admin Panel | New Post
 	</title>
